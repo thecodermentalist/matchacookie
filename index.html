@@ -1,0 +1,2478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+  <title>For You — Our Monthsary</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+    :root {
+      --ivory: #f7f3ec;
+      --cream: #eee7da;
+      --charcoal: #171514;
+      --burgundy: #4b1f28;
+      --wine: #681f31;
+      --gold: #b99a62;
+      --soft-gold: #d7c39a;
+      --muted: #81766b;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--ivory);
+      color: var(--charcoal);
+      font-family: "Inter", sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    button {
+      font-family: inherit;
+    }
+
+    /* =========================
+       LOADING SCREEN
+    ========================= */
+
+    .loader {
+      position: fixed;
+      inset: 0;
+      background: var(--charcoal);
+      color: var(--ivory);
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+
+      z-index: 99999;
+
+      animation: loaderOut 1.2s ease 2s forwards;
+      pointer-events: none;
+    }
+
+    .loader small {
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      font-size: 10px;
+      color: var(--soft-gold);
+      margin-bottom: 18px;
+    }
+
+    .loader h2 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 48px;
+      font-weight: 300;
+    }
+
+    @keyframes loaderOut {
+      to {
+        opacity: 0;
+        visibility: hidden;
+      }
+    }
+
+    /* =========================
+       MUSIC BUTTON
+    ========================= */
+
+    .music-button {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      z-index: 9000;
+
+      padding: 14px 20px;
+
+      background: rgba(23, 21, 20, .9);
+      color: var(--soft-gold);
+
+      border: 1px solid rgba(215,195,154,.5);
+
+      font-size: 9px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+
+      cursor: pointer;
+
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+
+      transition: .4s;
+    }
+
+    .music-button:hover {
+      background: var(--soft-gold);
+      color: var(--charcoal);
+    }
+
+    .music-icon {
+      display: inline-block;
+      margin-right: 8px;
+      font-size: 14px;
+    }
+
+    .music-button.playing {
+      box-shadow:
+        0 0 0 1px rgba(215,195,154,.2),
+        0 0 25px rgba(215,195,154,.25);
+    }
+
+    /* =========================
+       NAVIGATION
+    ========================= */
+
+    nav {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+
+      padding: 30px 6vw;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      z-index: 20;
+
+      color: white;
+    }
+
+    .logo {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 28px;
+      letter-spacing: 3px;
+    }
+
+    .nav-right {
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: rgba(255,255,255,.75);
+    }
+
+    /* =========================
+       HERO
+    ========================= */
+
+    .hero {
+      min-height: 100vh;
+      position: relative;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      text-align: center;
+      color: white;
+
+      background:
+        linear-gradient(
+          rgba(15, 12, 12, .52),
+          rgba(15, 12, 12, .70)
+        ),
+        url("./imglove.jpg");
+
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+
+    .hero-content {
+      max-width: 1000px;
+      padding: 40px 25px;
+      animation: heroIn 1.8s ease;
+    }
+
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 6px;
+      font-size: 9px;
+      color: var(--soft-gold);
+      margin-bottom: 30px;
+    }
+
+    .hero h1 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(65px, 11vw, 145px);
+      line-height: .78;
+      font-weight: 300;
+      letter-spacing: -4px;
+    }
+
+    .hero h1 span {
+      display: block;
+      font-style: italic;
+      color: #e6d5ae;
+    }
+
+    .hero-date {
+      margin-top: 42px;
+      font-size: 10px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.75);
+    }
+
+    .scroll {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+
+      font-size: 8px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.65);
+    }
+
+    .scroll::after {
+      content: "";
+      display: block;
+      width: 1px;
+      height: 45px;
+      background: var(--gold);
+      margin: 14px auto 0;
+    }
+
+    @keyframes heroIn {
+      from {
+        opacity: 0;
+        transform: translateY(25px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* =========================
+       INTRO
+    ========================= */
+
+    .intro {
+      padding: 150px 10vw;
+
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+
+      gap: 100px;
+      align-items: center;
+    }
+
+    .section-number {
+      color: var(--gold);
+      font-size: 10px;
+      letter-spacing: 3px;
+      margin-bottom: 25px;
+    }
+
+    .intro h2 {
+      font-family: "Cormorant Garamond", serif;
+      font-weight: 400;
+      font-size: clamp(50px, 6vw, 82px);
+      line-height: .9;
+    }
+
+    .intro h2 em {
+      color: var(--wine);
+    }
+
+    .intro-text {
+      max-width: 580px;
+    }
+
+    .intro-text p {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 27px;
+      line-height: 1.5;
+      color: #403933;
+    }
+
+    .signature {
+      margin-top: 35px;
+
+      font-family: "Cormorant Garamond", serif;
+      font-size: 32px;
+      font-style: italic;
+      color: var(--wine);
+    }
+
+    /* =========================
+       COUNTER
+    ========================= */
+
+    .counter-section {
+      background: var(--charcoal);
+      color: white;
+      padding: 120px 8vw;
+      text-align: center;
+    }
+
+    .counter-section .eyebrow {
+      margin-bottom: 45px;
+    }
+
+    .counter {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 55px;
+    }
+
+    .counter-item {
+      min-width: 120px;
+    }
+
+    .counter-item strong {
+      display: block;
+
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(45px, 6vw, 72px);
+      font-weight: 300;
+      color: var(--soft-gold);
+    }
+
+    .counter-item span {
+      font-size: 8px;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      color: #99908a;
+    }
+
+    /* =========================
+       MEMORIES
+    ========================= */
+
+    .memories {
+      padding: 150px 7vw;
+    }
+
+    .memory-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      margin-bottom: 70px;
+    }
+
+    .memory-heading h2 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(55px, 7vw, 100px);
+      font-weight: 300;
+      line-height: .8;
+    }
+
+    .memory-heading h2 em {
+      color: var(--wine);
+    }
+
+    .memory-heading p {
+      max-width: 300px;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.8;
+    }
+
+    /* =========================
+       GALLERY
+    ========================= */
+
+    .gallery {
+      display: grid;
+
+      grid-template-columns: 1.1fr .9fr 1fr;
+      grid-template-rows: 330px 330px;
+
+      gap: 15px;
+    }
+
+    .photo {
+      position: relative;
+      overflow: hidden;
+      background: #ddd;
+      cursor: pointer;
+    }
+
+    .photo img {
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+
+      transition: transform 1s ease;
+      filter: saturate(.8);
+    }
+
+    .photo:hover img {
+      transform: scale(1.07);
+    }
+
+    .photo::after {
+      content: "";
+
+      position: absolute;
+      inset: 0;
+
+      background: rgba(40,15,20,0);
+
+      transition: .5s ease;
+    }
+
+    .photo:hover::after {
+      background: rgba(40,15,20,.18);
+    }
+
+    .photo:nth-child(1) {
+      grid-row: span 2;
+    }
+
+    .photo:nth-child(4) {
+      grid-column: span 2;
+    }
+
+    .photo-label {
+      position: absolute;
+
+      bottom: 20px;
+      left: 20px;
+
+      z-index: 3;
+
+      color: white;
+
+      font-size: 8px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+
+      text-shadow: 0 2px 10px black;
+    }
+
+    /* =========================
+       MEMORY VIEWER
+    ========================= */
+
+    .memory-viewer {
+      position: fixed;
+      inset: 0;
+
+      background: rgba(10,9,8,.92);
+
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+
+      z-index: 5000;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      padding: 40px;
+
+      opacity: 0;
+      visibility: hidden;
+
+      transition:
+        opacity .5s ease,
+        visibility .5s ease;
+    }
+
+    .memory-viewer.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .viewer-content {
+      width: 100%;
+      max-width: 1250px;
+      min-height: 620px;
+
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+
+      background: #f6f1e9;
+
+      box-shadow:
+        0 40px 120px rgba(0,0,0,.5);
+
+      transform: translateY(30px) scale(.97);
+      transition: .55s ease;
+
+      position: relative;
+    }
+
+    .memory-viewer.active .viewer-content {
+      transform: translateY(0) scale(1);
+    }
+
+    .viewer-image {
+      position: relative;
+      overflow: hidden;
+      background: #222;
+    }
+
+    .viewer-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .viewer-message {
+      position: relative;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      padding: 70px;
+
+      background:
+        linear-gradient(
+          145deg,
+          #faf7f0,
+          #eee6d9
+        );
+    }
+
+    .viewer-message::before {
+      content: "";
+
+      position: absolute;
+      inset: 18px;
+
+      border: 1px solid rgba(185,154,98,.45);
+
+      pointer-events: none;
+    }
+
+    .viewer-number {
+      color: var(--gold);
+      font-size: 9px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .viewer-message h2 {
+      font-family: "Cormorant Garamond", serif;
+
+      font-size: 65px;
+      line-height: .9;
+      font-weight: 400;
+
+      color: var(--burgundy);
+
+      margin-bottom: 30px;
+    }
+
+    .viewer-message p {
+      font-family: "Cormorant Garamond", serif;
+
+      font-size: 23px;
+      line-height: 1.65;
+
+      color: #4a423b;
+    }
+
+    .viewer-heart {
+      margin-top: 35px;
+
+      color: var(--gold);
+
+      font-family: "Cormorant Garamond", serif;
+      font-size: 35px;
+    }
+
+    .viewer-close {
+      position: absolute;
+
+      top: 15px;
+      right: 20px;
+
+      z-index: 10;
+
+      width: 45px;
+      height: 45px;
+
+      border: none;
+      background: transparent;
+
+      color: white;
+
+      font-size: 32px;
+      font-weight: 200;
+
+      cursor: pointer;
+
+      transition: .3s;
+    }
+
+    .viewer-close:hover {
+      color: var(--soft-gold);
+      transform: rotate(90deg);
+    }
+
+    .viewer-nav {
+      position: absolute;
+
+      bottom: 35px;
+      right: 60px;
+
+      display: flex;
+      gap: 10px;
+
+      z-index: 5;
+    }
+
+    .viewer-nav button {
+      width: 48px;
+      height: 48px;
+
+      border: 1px solid rgba(185,154,98,.6);
+
+      background: transparent;
+      color: var(--burgundy);
+
+      cursor: pointer;
+      font-size: 17px;
+
+      transition: .3s;
+    }
+
+    .viewer-nav button:hover {
+      background: var(--gold);
+      color: white;
+    }
+
+    /* =========================
+       QUOTE
+    ========================= */
+
+    .quote {
+      min-height: 80vh;
+
+      padding: 100px 15vw;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      text-align: center;
+
+      background:
+        linear-gradient(
+          rgba(73,27,37,.86),
+          rgba(73,27,37,.92)
+        ),
+        url("./haha.jpg");
+
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+
+      color: white;
+    }
+
+    .quote-inner {
+      max-width: 900px;
+    }
+
+    .quote-mark {
+      color: var(--soft-gold);
+
+      font-family: "Cormorant Garamond", serif;
+      font-size: 100px;
+      line-height: .5;
+    }
+
+    .quote h2 {
+      font-family: "Cormorant Garamond", serif;
+
+      font-size: clamp(45px, 6vw, 80px);
+
+      font-weight: 300;
+      line-height: 1;
+
+      margin: 35px 0;
+    }
+
+    .quote h2 em {
+      color: var(--soft-gold);
+    }
+
+    /* =========================
+       LOVE LETTER
+    ========================= */
+
+    .letter-section {
+      position: relative;
+
+      min-height: 100vh;
+
+      padding: 150px 20px;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      overflow: hidden;
+    }
+
+    .letter-section video {
+      position: absolute;
+
+      top: 0;
+      left: 0;
+
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+
+      z-index: 0;
+    }
+
+    .letter-section::after {
+      content: "";
+
+      position: absolute;
+      inset: 0;
+
+      background: rgba(45, 20, 25, 0.55);
+
+      z-index: 1;
+    }
+
+    .letter {
+      position: relative;
+      z-index: 2;
+
+      max-width: 750px;
+
+      background:
+        linear-gradient(
+          rgba(250, 248, 243, 0.82),
+          rgba(250, 248, 243, 0.75)
+        ),
+        url("./uwu.jpg");
+
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+
+      padding: 90px;
+
+      box-shadow:
+        0 30px 80px rgba(0,0,0,.25);
+    }
+
+    .letter::before {
+      content: "";
+
+      position: absolute;
+      inset: 18px;
+
+      border: 1px solid rgba(185,154,98,.35);
+
+      pointer-events: none;
+    }
+
+    .letter-top {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .letter-top span {
+      color: var(--gold);
+
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      font-size: 9px;
+    }
+
+    .letter h2 {
+      font-family: "Cormorant Garamond", serif;
+
+      font-size: 65px;
+      font-weight: 400;
+
+      margin-top: 15px;
+    }
+
+    .letter p {
+      font-family: "Cormorant Garamond", serif;
+
+      font-size: 22px;
+      line-height: 1.8;
+
+      color: #433b35;
+    }
+
+    .letter-signature {
+      margin-top: 45px;
+
+      text-align: right;
+
+      font-family: "Cormorant Garamond", serif;
+
+      font-size: 30px;
+      font-style: italic;
+
+      color: var(--wine);
+    }
+
+    /* =========================
+       FINAL
+    ========================= */
+
+    .final {
+      min-height: 75vh;
+
+      background: var(--charcoal);
+
+      color: white;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      text-align: center;
+
+      padding: 80px 20px;
+    }
+
+    .final-content {
+      max-width: 800px;
+    }
+
+    .final .small {
+      text-transform: uppercase;
+
+      letter-spacing: 5px;
+      font-size: 9px;
+
+      color: var(--gold);
+    }
+
+    .final h2 {
+      font-family: "Cormorant Garamond", serif;
+
+      font-size: clamp(60px,9vw,120px);
+
+      line-height: .85;
+      font-weight: 300;
+
+      margin: 30px 0;
+    }
+
+    .final h2 em {
+      color: var(--soft-gold);
+    }
+
+    .final p {
+      color: #aaa19a;
+
+      max-width: 500px;
+
+      margin: auto;
+
+      line-height: 1.8;
+      font-size: 12px;
+    }
+
+    .love-button {
+      margin-top: 45px;
+
+      padding: 17px 38px;
+
+      background: transparent;
+
+      color: var(--soft-gold);
+
+      border: 1px solid rgba(215,195,154,.6);
+
+      cursor: pointer;
+
+      text-transform: uppercase;
+
+      letter-spacing: 3px;
+      font-size: 9px;
+
+      transition: .4s;
+    }
+
+    .love-button:hover {
+      background: var(--soft-gold);
+      color: var(--charcoal);
+    }
+
+    #secret {
+      margin-top: 30px;
+
+      display: none;
+
+      font-family: "Cormorant Garamond", serif;
+
+      font-size: 28px;
+
+      color: var(--soft-gold);
+
+      animation: fadeUp .8s ease;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(15px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer {
+      padding: 25px;
+
+      text-align: center;
+
+      background: #11100f;
+
+      color: #665f59;
+
+      font-size: 8px;
+
+      letter-spacing: 3px;
+
+      text-transform: uppercase;
+    }
+
+    /* =========================
+   MOBILE / IPHONE FIXES
+========================= */
+
+@media screen and (max-width: 850px) {
+
+  html,
+  body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+
+  /* =========================
+     NAVIGATION
+  ========================= */
+
+  nav {
+    padding: 20px 5vw;
+  }
+
+  .logo {
+    font-size: 22px;
+  }
+
+  .nav-right {
+    font-size: 7px;
+    letter-spacing: 2px;
+    text-align: right;
+  }
+
+
+  /* =========================
+     HERO
+  ========================= */
+
+  .hero {
+    min-height: 100svh;
+    min-height: 100dvh;
+
+    background-attachment: scroll;
+    background-position: center center;
+  }
+
+  .hero-content {
+    width: 100%;
+    padding: 40px 20px;
+  }
+
+  .hero h1 {
+    font-size: clamp(55px, 17vw, 90px);
+    letter-spacing: -2px;
+    line-height: .82;
+  }
+
+  .eyebrow {
+    font-size: 8px;
+    letter-spacing: 4px;
+  }
+
+  .hero-date {
+    font-size: 8px;
+    letter-spacing: 2px;
+    line-height: 1.6;
+  }
+
+
+  /* =========================
+     MUSIC BUTTON
+     
+     MUSIC FUNCTIONALITY NOT TOUCHED
+  ========================= */
+
+  .music-button {
+    right: 15px;
+
+    bottom:
+      calc(
+        15px + env(safe-area-inset-bottom)
+      );
+
+    padding: 12px 15px;
+
+    font-size: 8px;
+    letter-spacing: 1.5px;
+
+    max-width: calc(100vw - 30px);
+  }
+
+
+  /* =========================
+     INTRO
+  ========================= */
+
+  .intro {
+    padding: 90px 7vw;
+
+    display: block;
+  }
+
+  .intro h2 {
+    font-size: clamp(45px, 14vw, 70px);
+
+    margin-bottom: 45px;
+  }
+
+  .intro-text {
+    max-width: 100%;
+  }
+
+  .intro-text p {
+    font-size: 23px;
+    line-height: 1.5;
+  }
+
+  .signature {
+    font-size: 27px;
+  }
+
+
+  /* =========================
+     COUNTER
+  ========================= */
+
+  .counter-section {
+    padding: 90px 5vw;
+  }
+
+  .counter {
+    display: grid;
+
+    grid-template-columns:
+      repeat(2, 1fr);
+
+    gap: 45px 15px;
+  }
+
+  .counter-item {
+    min-width: 0;
+  }
+
+  .counter-item strong {
+    font-size: 48px;
+  }
+
+  .counter-item span {
+    font-size: 7px;
+    letter-spacing: 2px;
+  }
+
+
+  /* =========================
+     MEMORIES
+  ========================= */
+
+  .memories {
+    padding: 90px 5vw;
+  }
+
+  .memory-heading {
+    display: block;
+    margin-bottom: 45px;
+  }
+
+  .memory-heading h2 {
+    font-size: clamp(50px, 15vw, 75px);
+
+    line-height: .85;
+
+    margin-bottom: 30px;
+  }
+
+  .memory-heading p {
+    max-width: 100%;
+    font-size: 10px;
+  }
+
+
+  /* =========================
+     GALLERY
+  ========================= */
+
+  .gallery {
+    display: flex !important;
+
+    flex-direction: column !important;
+
+    width: 100%;
+
+    gap: 15px;
+  }
+
+  .photo,
+  .photo:nth-child(1),
+  .photo:nth-child(4) {
+    width: 100% !important;
+
+    height: 300px !important;
+    min-height: 300px !important;
+
+    display: block;
+
+    position: relative;
+
+    overflow: hidden;
+
+    background: #222;
+
+    flex: none !important;
+  }
+
+  .photo img {
+    display: block !important;
+
+    width: 100% !important;
+    height: 100% !important;
+
+    min-width: 100%;
+    min-height: 100%;
+
+    max-width: none;
+
+    object-fit: cover;
+
+    object-position: center center;
+
+    transform: none !important;
+  }
+
+  .photo-label {
+    bottom: 15px;
+    left: 15px;
+
+    font-size: 7px;
+    letter-spacing: 2px;
+  }
+
+
+  /* =========================
+     MEMORY VIEWER
+  ========================= */
+
+  .memory-viewer {
+    padding:
+      max(15px, env(safe-area-inset-top))
+      15px
+      max(15px, env(safe-area-inset-bottom))
+      15px;
+
+    overflow-y: auto;
+
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .viewer-content {
+    width: 100%;
+    max-width: 100%;
+
+    min-height: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    margin: auto;
+
+    transform:
+      translateY(20px)
+      scale(.98);
+  }
+
+  .memory-viewer.active .viewer-content {
+    transform:
+      translateY(0)
+      scale(1);
+  }
+
+  .viewer-image {
+    width: 100%;
+
+    height: 45vh;
+
+    min-height: 250px;
+    max-height: 430px;
+
+    flex-shrink: 0;
+  }
+
+  .viewer-image img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .viewer-message {
+    width: 100%;
+
+    padding:
+      45px
+      30px
+      110px;
+
+    min-height: 330px;
+  }
+
+  .viewer-message::before {
+    inset: 12px;
+  }
+
+  .viewer-number {
+    font-size: 8px;
+    letter-spacing: 3px;
+  }
+
+  .viewer-message h2 {
+    font-size: clamp(45px, 13vw, 65px);
+
+    line-height: .9;
+
+    margin-bottom: 25px;
+  }
+
+  .viewer-message p {
+    font-size: 20px;
+    line-height: 1.55;
+  }
+
+  .viewer-heart {
+    margin-top: 25px;
+  }
+
+  .viewer-close {
+    top: 10px;
+    right: 10px;
+
+    width: 42px;
+    height: 42px;
+
+    font-size: 30px;
+  }
+
+  .viewer-nav {
+    bottom: 25px;
+    right: 25px;
+
+    gap: 8px;
+  }
+
+  .viewer-nav button {
+    width: 45px;
+    height: 45px;
+
+    -webkit-tap-highlight-color: transparent;
+  }
+
+
+  /* =========================
+     QUOTE
+  ========================= */
+
+  .quote {
+    min-height: 70svh;
+    min-height: 70dvh;
+
+    padding: 80px 8vw;
+
+    background-attachment: scroll;
+  }
+
+  .quote-mark {
+    font-size: 75px;
+  }
+
+  .quote h2 {
+    font-size: clamp(42px, 12vw, 65px);
+
+    line-height: 1.05;
+  }
+
+
+  /* =========================
+     LOVE LETTER VIDEO
+  ========================= */
+
+  .letter-section {
+    min-height: 100svh;
+    min-height: 100dvh;
+
+    padding: 70px 15px;
+
+    position: relative;
+
+    overflow: hidden;
+  }
+
+  .letter-section video {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    min-width: 100%;
+    min-height: 100%;
+
+    object-fit: cover;
+
+    object-position: center center;
+
+    display: block;
+
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+  }
+
+  .letter-section::after {
+    background:
+      rgba(45, 20, 25, .60);
+  }
+
+  .letter {
+    width: 100%;
+    max-width: 100%;
+
+    padding: 60px 30px;
+
+    background:
+      linear-gradient(
+        rgba(250, 248, 243, .84),
+        rgba(250, 248, 243, .78)
+      ),
+      url("./uwu.jpg");
+
+    background-size: cover;
+
+    background-position: center;
+  }
+
+  .letter::before {
+    inset: 12px;
+  }
+
+  .letter-top {
+    margin-bottom: 35px;
+  }
+
+  .letter h2 {
+    font-size:
+      clamp(48px, 14vw, 65px);
+  }
+
+  .letter p {
+    font-size: 19px;
+    line-height: 1.7;
+  }
+
+  .letter-signature {
+    font-size: 27px;
+    margin-top: 35px;
+  }
+
+
+  /* =========================
+     FINAL
+  ========================= */
+
+  .final {
+    min-height: 75svh;
+    min-height: 75dvh;
+
+    padding:
+      80px 20px
+      calc(
+        80px +
+        env(safe-area-inset-bottom)
+      );
+  }
+
+  .final h2 {
+    font-size:
+      clamp(55px, 15vw, 90px);
+  }
+
+  .final p {
+    font-size: 11px;
+  }
+
+  .love-button {
+    padding: 16px 25px;
+
+    max-width: 100%;
+
+    font-size: 8px;
+  }
+
+  #secret {
+    font-size: 24px;
+  }
+}
+
+
+/* =========================
+   SMALL PHONES
+   iPhone SE / similar
+========================= */
+
+@media screen and (max-width: 390px) {
+
+  .nav-right {
+    font-size: 6px;
+    letter-spacing: 1.5px;
+  }
+
+  .hero h1 {
+    font-size: 58px;
+  }
+
+  .photo,
+  .photo:nth-child(1),
+  .photo:nth-child(4) {
+    height: 270px !important;
+    min-height: 270px !important;
+  }
+
+  .viewer-image {
+    height: 38vh;
+    min-height: 220px;
+  }
+
+  .viewer-message {
+    padding:
+      40px
+      25px
+      105px;
+  }
+
+  .viewer-message p {
+    font-size: 18px;
+  }
+
+  .letter {
+    padding: 50px 25px;
+  }
+
+  .letter p {
+    font-size: 18px;
+  }
+}
+
+
+/* =========================
+   LANDSCAPE PHONES
+========================= */
+
+@media screen
+  and (max-width: 850px)
+  and (orientation: landscape) {
+
+  .hero {
+    min-height: 100svh;
+    min-height: 100dvh;
+  }
+
+  .viewer-content {
+    flex-direction: row;
+  }
+
+  .viewer-image {
+    width: 50%;
+    height: 80vh;
+  }
+
+  .viewer-message {
+    width: 50%;
+    overflow-y: auto;
+  }
+}
+
+
+/* =========================
+   IOS TOUCH FIXES
+========================= */
+
+button,
+.photo {
+  -webkit-tap-highlight-color: transparent;
+
+  touch-action: manipulation;
+}
+
+img,
+video {
+  max-width: 100%;
+}
+
+  
+
+  </style>
+</head>
+
+<body>
+
+  <!-- MUSIC -->
+
+  <audio id="bgMusic" loop>
+    <source src="etet.mp3" type="audio/mpeg">
+  </audio>
+
+  <button
+    class="music-button"
+    id="musicButton"
+    onclick="toggleMusic()"
+    aria-label="Play or pause our song"
+  >
+    <span class="music-icon">♫</span>
+    <span id="musicText">Play our song</span>
+  </button>
+
+
+  <!-- LOADING -->
+
+  <div class="loader">
+    <small>A little something</small>
+    <h2>For You.</h2>
+  </div>
+
+
+  <!-- NAVIGATION -->
+
+  <nav>
+    <div class="logo">D & B</div>
+
+    <div class="nav-right">
+      Our Story · Monthsary
+    </div>
+  </nav>
+
+
+  <!-- HERO -->
+
+  <section class="hero">
+
+    <div class="hero-content">
+
+      <div class="eyebrow">
+        Another chapter of us
+      </div>
+
+      <h1>
+        Happy
+        <span>Monthsary.</span>
+      </h1>
+
+      <div class="hero-date">
+        May 10, 2025 · With love, always
+      </div>
+
+    </div>
+
+    <div class="scroll">
+      Discover
+    </div>
+
+  </section>
+
+
+  <!-- INTRO -->
+
+  <section class="intro">
+
+    <div>
+
+      <div class="section-number">
+        01 — US
+      </div>
+
+      <h2>
+        Every moment always
+        feels<br>
+        better with<br>
+        <em>you.</em>
+      </h2>
+
+    </div>
+
+    <div class="intro-text">
+
+      <p>
+        Bal, you never failed to make
+        me smile and feel loved. Kaya
+        sayo at sayo ako palagi:>
+      </p>
+
+      <div class="signature">
+        — Always yours ang Dudu mo !
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- COUNTER -->
+
+  <section class="counter-section">
+
+    <div class="eyebrow">
+      A little reminder
+    </div>
+
+    <div class="counter">
+
+      <div class="counter-item">
+        <strong id="months">0</strong>
+        <span>Months</span>
+      </div>
+
+      <div class="counter-item">
+        <strong id="days">0</strong>
+        <span>Days</span>
+      </div>
+
+      <div class="counter-item">
+        <strong id="hours">0</strong>
+        <span>Hours</span>
+      </div>
+
+      <div class="counter-item">
+        <strong id="minutes">0</strong>
+        <span>Minutes</span>
+      </div>
+
+      <div class="counter-item">
+        <strong id="seconds">0</strong>
+        <span>Seconds</span>
+      </div>
+
+      <div class="counter-item">
+        <strong>∞</strong>
+        <span>Memories</span>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- MEMORIES -->
+
+  <section class="memories">
+
+    <div class="memory-heading">
+
+      <div>
+
+        <div class="section-number">
+          02 — MEMORIES
+        </div>
+
+        <h2>
+          Moments<br>
+          <em>worth keeping.</em>
+        </h2>
+
+      </div>
+
+      <p>
+        Click on each photograph.
+        Each one holds a little message
+        from me to you.
+      </p>
+
+    </div>
+
+
+    <div class="gallery">
+
+      <div class="photo" onclick="openMemory(0)">
+        <img src="./uu.png" alt="The beginning">
+
+        <div class="photo-label">
+          The beginning · Click me
+        </div>
+      </div>
+
+
+      <div class="photo" onclick="openMemory(1)">
+        <img src="./mom.jpg" alt="You and me">
+
+        <div class="photo-label">
+          You & me · Click me
+        </div>
+      </div>
+
+
+      <div class="photo" onclick="openMemory(2)">
+        <img src="./me.jpg" alt="Little moments">
+
+        <div class="photo-label">
+          Little moments · Click me
+        </div>
+      </div>
+
+
+      <div class="photo" onclick="openMemory(3)">
+        <img src="./ses.jpg" alt="Our story">
+
+        <div class="photo-label">
+          Our story · Click me
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- MEMORY VIEWER -->
+
+  <div class="memory-viewer" id="memoryViewer">
+
+    <button
+      class="viewer-close"
+      onclick="closeMemory()"
+      aria-label="Close"
+    >
+      ×
+    </button>
+
+    <div class="viewer-content">
+
+      <div class="viewer-image">
+        <img
+          id="viewerImage"
+          src=""
+          alt="Memory"
+        >
+      </div>
+
+      <div class="viewer-message">
+
+        <div
+          class="viewer-number"
+          id="viewerNumber"
+        >
+          MEMORY 01
+        </div>
+
+        <h2 id="viewerTitle">
+          The Beginning
+        </h2>
+
+        <p id="viewerText">
+          Your message goes here.
+        </p>
+
+        <div class="viewer-heart">
+          ♡
+        </div>
+
+        <div class="viewer-nav">
+
+          <button
+            onclick="previousMemory()"
+            aria-label="Previous memory"
+          >
+            ←
+          </button>
+
+          <button
+            onclick="nextMemory()"
+            aria-label="Next memory"
+          >
+            →
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- QUOTE -->
+
+  <section class="quote">
+
+    <div class="quote-inner">
+
+      <div class="quote-mark">
+        “
+      </div>
+
+      <h2>
+        If I had to choose again,
+        I'd still choose <em>you.</em>
+      </h2>
+
+      <div class="eyebrow">
+        Every single time
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- LOVE LETTER -->
+
+  <section class="letter-section">
+
+    <video
+      autoplay
+      muted
+      loop
+      playsinline
+    >
+      <source src="./hehe.mp4" type="video/mp4">
+    </video>
+
+    <div class="letter">
+
+      <div class="letter-top">
+
+        <span>
+          A love letter
+        </span>
+
+        <h2>
+          To You.
+        </h2>
+
+      </div>
+
+      <p>
+
+        My Bal,
+
+        <br><br>
+
+        Happy 16th monthsary!
+
+        <br><br>
+
+        Alam ko po bal na I haven't been a good husband sayo lately,
+        lalo na po there were times na I had 0 energy and was always dry.
+        I hope you know na that doesn't make my love less than I love you
+        like before bal. If it made you think or feel na I'm giving up on
+        you na and on our relationship, I'm really sorry po mahal. I never
+        once want to lose you or let go of you bal, promise. Hindi ko po
+        makakaya mawala ka kasi you're there for me palagi and you never
+        fail to show me na love mo po talaga ako. Hindi ka po nagkulang,
+        not even once, maybe nung kulang lang yung binigay mong kiss...
+        HAHAHAHAHAHAH pero kidding aside baby. You're already perfect
+        for me. Kaya po kampante na ako na ikaw lang ang gusto kong makasama
+        at mahalin habang buhay. Ikaw lang yun, Daphne Venice G. Asis.
+
+        <br><br>
+
+        Kung babalikan natin ang past months na we were together, tbh it wasn't
+        that easy. Acads, stress, and other probs made it worse. But if I'm gonna
+        be honest again bal. Those didn't matter for me kahit gaano pa kadami or
+        kabigat kasi andiyan ka naman eh. Kumbaga wala silang palag sa powers mo
+        eyyy HAHAHAHAHAHA pero really bal, mas nangibabaw po yung gaan sa puso at
+        isip ko knowing you're there for me and I'm also here for you. We destroyed them
+        destroyed??? ang emeee pero real baby. Di sila umubra sa'tin eyy bubu x dudu
+
+        <br><br>
+
+        Bal, sana lagi mo pong tatandaan na mahal na mahal kita. Palagi.
+        Kahit ano po mangyari, ikaw at ikaw lang palagi.
+        Hayaan mo pong bumawi pa ako sa lahat ng pagkukulang ko.
+        Magpapakasal pa tayo diba? hehe.
+        Wait mo lang baby, darating tayo doon :>
+
+        <br><br>
+
+        I will continue to wait for God's perfect timing.
+        Kasi I know na the wait is always worth it.
+
+        <br><br>
+
+        Thank you for everything mahal.
+
+        <br><br>
+
+        Mahal na mahal na mahal na mahal kita,
+        Palagi't palagi, Daphne.
+
+      </p>
+
+      <div class="letter-signature">
+        With all my love,<br>
+        Yours.
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- FINAL -->
+
+  <section class="final">
+
+    <div class="final-content">
+
+      <div class="small">
+        03 — THE BEST PART
+      </div>
+
+      <h2>
+        HAPPY 16TH<br>
+        <em>MAHAL KO.</em>
+      </h2>
+
+      <p>
+        One month becomes another.
+        Another memory becomes another story.
+        And somehow, through it all,
+        it's still you.
+      </p>
+
+      <button
+        class="love-button"
+        onclick="revealLove()"
+      >
+        Open one last thing
+      </button>
+
+      <div id="secret">
+        I love you.
+        More than words can fit on this page. ♡
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- FOOTER -->
+
+  <footer>
+    Made with love · For my favorite person
+  </footer>
+
+
+  <script>
+
+    /* =====================================================
+       RELATIONSHIP START DATE
+       
+       MAY 10, 2025
+
+       IMPORTANT:
+       JavaScript months start at 0.
+       4 = May.
+    ===================================================== */
+
+    const startDate = new Date(
+      2025,
+      4,
+      10,
+      0,
+      0,
+      0
+    );
+
+
+    /* =====================================================
+       COUNTER
+    ===================================================== */
+
+    function updateCounter() {
+
+      const now = new Date();
+
+      /*
+        If the current date is before the relationship
+        start date, show zero.
+      */
+
+      if (now < startDate) {
+
+        document.getElementById("months").textContent = "0";
+        document.getElementById("days").textContent = "0";
+        document.getElementById("hours").textContent = "0";
+        document.getElementById("minutes").textContent = "0";
+        document.getElementById("seconds").textContent = "0";
+
+        return;
+      }
+
+
+      /*
+        Calculate completed months.
+      */
+
+      let months =
+        (now.getFullYear() - startDate.getFullYear()) * 12 +
+        (now.getMonth() - startDate.getMonth());
+
+
+      /*
+        Create this month's anniversary date.
+      */
+
+      let anniversary = new Date(
+        startDate.getFullYear(),
+        startDate.getMonth() + months,
+        startDate.getDate(),
+        startDate.getHours(),
+        startDate.getMinutes(),
+        startDate.getSeconds()
+      );
+
+
+      /*
+        If this month's anniversary has not happened yet,
+        subtract one month.
+      */
+
+      if (anniversary > now) {
+
+        months--;
+
+        anniversary = new Date(
+          startDate.getFullYear(),
+          startDate.getMonth() + months,
+          startDate.getDate(),
+          startDate.getHours(),
+          startDate.getMinutes(),
+          startDate.getSeconds()
+        );
+      }
+
+
+      /*
+        Remaining time after completed months.
+      */
+
+      let difference =
+        now.getTime() - anniversary.getTime();
+
+
+      const DAY =
+        1000 * 60 * 60 * 24;
+
+      const HOUR =
+        1000 * 60 * 60;
+
+      const MINUTE =
+        1000 * 60;
+
+      const SECOND =
+        1000;
+
+
+      /*
+        Days
+      */
+
+      const days =
+        Math.floor(difference / DAY);
+
+      difference %= DAY;
+
+
+      /*
+        Hours
+      */
+
+      const hours =
+        Math.floor(difference / HOUR);
+
+      difference %= HOUR;
+
+
+      /*
+        Minutes
+      */
+
+      const minutes =
+        Math.floor(difference / MINUTE);
+
+      difference %= MINUTE;
+
+
+      /*
+        Seconds
+      */
+
+      const seconds =
+        Math.floor(difference / SECOND);
+
+
+      /*
+        Update page.
+      */
+
+      document.getElementById("months").textContent =
+        months.toLocaleString();
+
+      document.getElementById("days").textContent =
+        days.toLocaleString();
+
+      document.getElementById("hours").textContent =
+        hours.toLocaleString();
+
+      document.getElementById("minutes").textContent =
+        minutes.toLocaleString();
+
+      document.getElementById("seconds").textContent =
+        seconds.toLocaleString();
+    }
+
+
+    /*
+      Start counter immediately.
+    */
+
+    updateCounter();
+
+
+    /*
+      Update every second.
+    */
+
+    setInterval(updateCounter, 1000);
+
+
+    /* =====================================================
+       MEMORY DATA
+    ===================================================== */
+
+    const memories = [
+
+      {
+        title: "The Beginning",
+
+        image: "./beg.jpg",
+
+        message:
+          "Bal, naaalala po ba ito? Hehe. It felt awkward but atst there were butterflies na (butterflies??) Hays, I wanna watch more concerts pa with you! Soon again, and again, my asawa :>"
+      },
+
+      {
+        title: "You & Me",
+
+        image: "./peg.jpg",
+
+        message:
+          "I'm so lucky baby kasi I have you and what makes me more lucky is that you chose me out of all the people that wants to have you :> parang nanalo lang ako sa intergalactic lotto niyan bal HAHAHAHAHAHAHA"
+      },
+
+      {
+        title: "Little Moments",
+
+        image: "./Bear.jpg",
+
+        message:
+          "Parang nag snapchat lang e HAHAHAHAHA I miss this bal, us holding hands and together again. But this day was special, we got to hang out and date again after our tupads. Ama let us be together uli hihi."
+      },
+
+      {
+        title: "Our Story",
+
+        image: "./st.jpg",
+
+        message:
+          "We may have had a short time being together, tulad dito sa pic. Pero we made sure na hindi lang tayo hanggang dun. The fact that we had to separate was where our story and pagsubok really started. And look bal, after everything, we're still here :> Dahil hindi tayo nagsawa at napagod sa isa't isa at hindi tayo pinabayaan ni Ama."
+      }
+
+    ];
+
+
+    /* =====================================================
+       CURRENT MEMORY
+    ===================================================== */
+
+    let currentMemory = 0;
+
+
+    /* =====================================================
+       OPEN MEMORY
+    ===================================================== */
+
+    function openMemory(index) {
+
+      currentMemory = index;
+
+      const memory =
+        memories[currentMemory];
+
+
+      document.getElementById("viewerImage").src =
+        memory.image;
+
+      document.getElementById("viewerTitle").textContent =
+        memory.title;
+
+      document.getElementById("viewerText").textContent =
+        memory.message;
+
+      document.getElementById("viewerNumber").textContent =
+        "MEMORY " +
+        String(currentMemory + 1).padStart(2, "0");
+
+
+      document
+        .getElementById("memoryViewer")
+        .classList.add("active");
+
+
+      document.body.style.overflow =
+        "hidden";
+    }
+
+
+    /* =====================================================
+       CLOSE MEMORY
+    ===================================================== */
+
+    function closeMemory() {
+
+      document
+        .getElementById("memoryViewer")
+        .classList.remove("active");
+
+      document.body.style.overflow =
+        "";
+    }
+
+
+    /* =====================================================
+       NEXT MEMORY
+    ===================================================== */
+
+    function nextMemory() {
+
+      currentMemory++;
+
+      if (currentMemory >= memories.length) {
+        currentMemory = 0;
+      }
+
+      openMemory(currentMemory);
+    }
+
+
+    /* =====================================================
+       PREVIOUS MEMORY
+    ===================================================== */
+
+    function previousMemory() {
+
+      currentMemory--;
+
+      if (currentMemory < 0) {
+        currentMemory =
+          memories.length - 1;
+      }
+
+      openMemory(currentMemory);
+    }
+
+
+    /* =====================================================
+       KEYBOARD CONTROLS
+    ===================================================== */
+
+    document.addEventListener(
+      "keydown",
+      function(event) {
+
+        const viewer =
+          document.getElementById("memoryViewer");
+
+        if (!viewer.classList.contains("active")) {
+          return;
+        }
+
+
+        if (event.key === "Escape") {
+          closeMemory();
+        }
+
+
+        if (event.key === "ArrowRight") {
+          nextMemory();
+        }
+
+
+        if (event.key === "ArrowLeft") {
+          previousMemory();
+        }
+
+      }
+    );
+
+
+    /* =====================================================
+       CLICK OUTSIDE MEMORY
+    ===================================================== */
+
+    document
+      .getElementById("memoryViewer")
+      .addEventListener(
+        "click",
+        function(event) {
+
+          if (event.target === this) {
+            closeMemory();
+          }
+
+        }
+      );
+
+
+    /* =====================================================
+       MUSIC PLAYER
+    ===================================================== */
+
+    const bgMusic =
+      document.getElementById("bgMusic");
+
+    const musicText =
+      document.getElementById("musicText");
+
+    const musicButton =
+      document.getElementById("musicButton");
+
+
+    function toggleMusic() {
+
+      if (bgMusic.paused) {
+
+        bgMusic.play()
+          .then(() => {
+
+            musicText.textContent =
+              "Pause our song";
+
+            musicButton.classList.add(
+              "playing"
+            );
+
+          })
+          .catch(() => {
+
+            musicText.textContent =
+              "Tap to play";
+
+          });
+
+      } else {
+
+        bgMusic.pause();
+
+        musicText.textContent =
+          "Play our song";
+
+        musicButton.classList.remove(
+          "playing"
+        );
+      }
+
+    }
+
+
+    /* =====================================================
+       SECRET MESSAGE
+    ===================================================== */
+
+    function revealLove() {
+
+      const secret =
+        document.getElementById("secret");
+
+
+      if (secret.style.display === "block") {
+
+        secret.style.display =
+          "none";
+
+      } else {
+
+        secret.style.display =
+          "block";
+      }
+
+    }
+
+  </script>
+
+</body>
+</html>
